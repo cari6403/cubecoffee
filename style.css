@@ -44,7 +44,7 @@ a {
     color: black;
 }
 
-.active {
+nav .active {
     border-bottom: solid 2px black;
     padding-bottom: 5px;
 
