@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <link rel="stylesheet" href="style.css">
+
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+
     <title>cube</title>
     <style>
         #products_big {
@@ -106,9 +108,6 @@
             top: 70%;
             left: 5%;
         }
-
-
-        @media screen and (min-width:700px) {}
     </style>
 </head>
 
@@ -230,7 +229,7 @@
         </div>
         <div>
             <h3 class="mt-3">If you can dream it, you can recycle it!</h3>
-            <p class="mt-3 text-left">Det er en kendsgerning, at man bliver distraheret af læsbart indhold på en side, når man betragter dens layout. Meningen med at bruge Lorem Ipsum er, at teksten indeholder mere eller mindre almindelig tekstopbygning i modsætning til "Tekst her - og mere tekst her", mens det samtidigt ligner almindelig tekst. </p>
+            <p class="mt-3 text-left">Cube Coffee er certificeret bionedbrydelig! Når du køber vores veganske kaffe, får du garanti for en emballage der er 100% giftfri og fri for skadelige kemikalier. Du er dermed med til at passe på miljøet når du køber en Cube Coffee.</p>
         </div>
 
     </section>
@@ -241,9 +240,9 @@
         <div class="container d-none d-lg-flex mt-5">
 
             <img src="pics/biocert.png" class="img-fluid col-5 bio_spin delay-1500">
-            <div class="col-7 ml-5 mt-5">
+            <div class="col-7 ml-5 mt-4">
                 <h1 class="display-4">If you can dream it, you can recycle it!</h1>
-                <p class="mt-3">Det er en kendsgerning, at man bliver distraheret af læsbart indhold på en side, når man betragter dens layout. Meningen med at bruge Lorem Ipsum er, at teksten indeholder mere eller mindre almindelig tekstopbygning i modsætning til "Tekst her - og mere tekst her", mens det samtidigt ligner almindelig tekst. </p>
+                <p class="mt-5 pr-4">Alle cubes drikkevarer er certificeret bionedbrydelig! Når du køber vores veganske kaffe, får du garanti for en emballage der er 100% giftfri og fri for skadelige kemikalier. Du er dermed med til at passe på miljøet når du køber en iskaffe hos os.</p>
             </div>
 
 
@@ -273,7 +272,36 @@
 
 
 
+    <!-- Site footer -->
+    <footer class="site-footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>About</h6>
+                    <p class="text-justify">Dette er et fiktivt mærke og site udarbejdet i forbindelse med KEA multimediedesigner-uddannelsen.</p>
+                </div>
 
+                <div class="col-xs-6 col-md-3">
+                    <h6>Social media</h6>
+                    <ul class="footer-links">
+                        <li><a href="https://facebook.com">facebook</a></li>
+                        <li><a href="https://instagram.com">instagram</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="index.html">home</a></li>
+                        <li><a href="about.html">about us</a></li>
+                        <li><a href="recipes.html">recipes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+    </footer>
 
 
     <!-- Optional JavaScript -->
@@ -285,4 +313,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="myScript.js"></script>
+    <script>
+        $(() => {
+            //$('img').addClass('slide-rotate-hor-t-bck');
+
+            //jQuery variabler starter med $ - og hvis vi skal tilgå et elememnt i DOM'en flere gange, gør vi sådan */
+            $window = $(window); /* her skal vi bruge window til at vide viewportens højde og hvor langt, der er scrollet ned på siden fra toppen */
+
+            $(".bio_spin").addClass('invisible'); /*undgå flash af indhold ,vi animerer, men pladsen bevares, men er "tom"/invisible. Se CSS-klassen */
+
+            //$('body, html').scroll(function() { <= skrammel?
+            $window.scroll(function() { //lytter på scroll event i vinduet
+                $animOffset1 = $('#biofacts').offset().top; //offset for start på animationselement */
+                console.log('anim1 ' + $animOffset1); /* værdi vises i console  */
+
+                $windowYoffset = window.pageYOffset + $window.height(); //Viewportens y-værdi efter scroll + vinduets højde for at komme ned i bunden af vinduet - ellers ville animation fyre lang tid før vore element er i viewporten */
+                console.log('windowY ' + $windowYoffset);
+
+                if ($windowYoffset > $animOffset1) { //når vinduet Y-offset (inkl vinduets højde) er større end startpunktet (y-værdien) for det vi vil animere, så skal animation køre */
+                    $(".bio_spin").removeClass('invisible').addClass('visible');
+                    //gør det visible
+                    //og tilføjer klasserne med animationer inkl. delays
+                    $(".bio_spin").addClass("swirl-in-fwd");
+                } else { //hvis vi scroller så langt op, at det vi vil animere på er udenfor vinduet, så fjernes klassen med animation... så den kan tilføjes igen, hvis nu brugeren scroller tilbage
+                    $(".bio_spin").removeClass("swirl-in-fwd");
+                }
+            }); //END scroll event
+        });
+    </script>
 </body></html>
